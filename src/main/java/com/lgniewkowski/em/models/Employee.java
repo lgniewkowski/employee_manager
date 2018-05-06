@@ -16,7 +16,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name="first_name")

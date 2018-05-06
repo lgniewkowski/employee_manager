@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 public class EmployeeTreeDTO {
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private Address address;

@@ -1,6 +1,5 @@
 package com.lgniewkowski.em.repositories;
 
-import com.lgniewkowski.em.models.Address;
 import com.lgniewkowski.em.models.Employee;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import static com.lgniewkowski.em.utils.EntityFactory.createEmployee;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -32,30 +32,15 @@ public class EmployeeRepositoryTest {
 
     @Before
     public void initData() {
-        currentSupervisor = createEmployee("Sheev", "Palpatine", createAddress("unknown", "Theed"));
-        subordinate = createEmployee("Anakin", "Skywalker", createAddress("unknown", "Mos Espa"));
-        previousSupervisor = createEmployee("Obi-Wan", "Kenobi", createAddress("unknown", "Stewjon"));
+        currentSupervisor = createEmployee("Sheev", "Palpatine", "unknown", "Theed");
+        subordinate = createEmployee("Anakin", "Skywalker", "unknown", "Mos Espa");
+        previousSupervisor = createEmployee("Obi-Wan", "Kenobi", "unknown", "Stewjon");
         subordinate.setSupervisor(previousSupervisor);
         subordinate.setSupervisor(currentSupervisor);
         testEntityManager.persist(currentSupervisor);
         testEntityManager.persist(subordinate);
         testEntityManager.persist(previousSupervisor);
         testEntityManager.flush();
-    }
-
-    private Employee createEmployee(String firstName, String secondName, Address address) {
-        Employee employee = new Employee();
-        employee.setFirstName(firstName);
-        employee.setLastName(secondName);
-        employee.setAddress(address);
-        return employee;
-    }
-
-    private Address createAddress(String street, String city) {
-        Address address = new Address();
-        address.setStreet(street);
-        address.setCity(city);
-        return address;
     }
 
     @Test

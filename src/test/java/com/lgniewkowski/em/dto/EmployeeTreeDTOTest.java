@@ -1,11 +1,11 @@
 package com.lgniewkowski.em.dto;
 
-import com.lgniewkowski.em.models.Address;
 import com.lgniewkowski.em.models.Employee;
 import org.junit.Before;
 import org.junit.Test;
 import org.modelmapper.ModelMapper;
 
+import static com.lgniewkowski.em.utils.EntityFactory.createEmployee;
 import static org.junit.Assert.assertEquals;
 
 public class EmployeeTreeDTOTest {
@@ -33,17 +33,4 @@ public class EmployeeTreeDTOTest {
         assertEquals(employee.getLastName(), dto.getLastName());
         assertEquals(employee.getAddress(), dto.getAddress());
     }
-
-    private Employee createEmployee(Long id, String firstName, String secondName, String street, String city) {
-        Employee employee = new Employee();
-        employee.setId(id);
-        employee.setFirstName(firstName);
-        employee.setLastName(secondName);
-        Address address = new Address();
-        address.setStreet(street);
-        address.setCity(city);
-        employee.setAddress(address);
-        return employee;
-    }
-
 }

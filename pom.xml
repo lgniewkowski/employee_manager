@@ -13,7 +13,7 @@
     <properties>
         <spring.boot.starter.version>1.5.3.RELEASE</spring.boot.starter.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <start-class>com.lgniewkowski.em.Application</start-class>
+        <start-class>com.lgniewkowski.em.App</start-class>
     </properties>
 
     <parent>

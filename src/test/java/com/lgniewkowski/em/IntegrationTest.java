@@ -1,6 +1,5 @@
 package com.lgniewkowski.em;
 
-import com.lgniewkowski.em.models.Address;
 import com.lgniewkowski.em.models.Employee;
 import com.lgniewkowski.em.repositories.EmployeeRepository;
 import org.junit.Test;
@@ -12,6 +11,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static com.lgniewkowski.em.utils.EntityFactory.createEmployee;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,16 +32,10 @@ public class IntegrationTest {
 
     @Test
     public void getSingleEmployee() throws Exception {
-        Employee employee = new Employee();
-        employee.setFirstName("Tom");
-        employee.setLastName("Bombadil");
-        Address address = new Address();
-        address.setStreet("unknown");
-        address.setCity("unknown");
-        employee.setAddress(address);
+        Employee employee = createEmployee("Tom", "Bombadil", "unknown", "unknown");
         repository.saveAndFlush(employee);
 
-        mvc.perform(get("/tree"))
+        mvc.perform(get("/api/tree"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].firstName", is(employee.getFirstName())))
